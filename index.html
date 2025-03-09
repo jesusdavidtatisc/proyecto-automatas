@@ -12,17 +12,17 @@
         <label>Nombre:</label>
         <input type="text" id="name" required pattern="^[A-Za-z\s]+$">
         <label>Código Estudiante:</label>
-        <input type="text" id="code" required pattern="^[0-9]{1,10}$">
+        <input type="text" id="code" required pattern="^[1-9][0-9]{7}$">
         <label>Fecha de Ingreso:</label>
-        <input type="date" id="date" required>
+        <input type="text" id="date" required pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$" placeholder="DD/MM/AAAA">
         <label>Dirección:</label>
         <input type="text" id="address" required pattern="^[A-Za-z0-9#\-\s]+$">
         <label>Teléfono Fijo:</label>
-        <input type="text" id="phone" required pattern="^(60[1-8])\d{7}$">
+        <input type="text" id="phone" required pattern="^6056[0-9]{6}$">
         <label>Teléfono Celular:</label>
         <input type="text" id="mobile" required pattern="^3[0-9]{9}$">
         <label>Correo Electrónico:</label>
-        <input type="email" id="email" required>
+        <input type="email" id="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="ejemplo@correo.com">
         <button type="submit">Registrar</button>
     </form>
     
@@ -31,7 +31,9 @@
     
     <h3>Exportar Datos</h3>
     <button onclick="exportData('json')">Exportar JSON</button>
-    
+    <button onclick="exportData('txt')">Exportar TXT</button>
+    <button onclick="exportData('xml')">Exportar XML</button>
+    <button onclick="exportData('csv')">Exportar CSV</button>
     
     <h3>Importar Datos</h3>
     <input type="file" id="importFile">

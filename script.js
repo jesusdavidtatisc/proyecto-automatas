@@ -23,16 +23,30 @@ function updateStudentList() {
     list.innerHTML = '';
     students.forEach((student, index) => {
         const li = document.createElement('li');
-        li.textContent = `${index + 1}. ${student.name} - ${student.code} - ${student.date} - ${student.address} - ${student.phone} - ${student.mobile} - ${student.email}`;
+        li.textContent = `${index + 1}. ${student.name} - ${student.code}`;
         list.appendChild(li);
     });
 }
 
-function exportData() {
-    const data = JSON.stringify(students, null, 2);
-    downloadFile(data, 'students.json', 'application/json');
+function exportData(format) {
+    let data = '';
+    if (format === 'json') {
+        data = JSON.stringify(students, null, 2);
+        downloadFile(data, 'students.json', 'application/json');
+    } else if (format === 'txt') {
+        data = students.map(s => Object.values(s).join(', ')).join('\n');
+        downloadFile(data, 'students.txt', 'text/plain');
+    } else if (format === 'xml') {
+        data = '<?xml version="1.0" encoding="UTF-8"?>\n<students>' + 
+                students.map(s => `\n  <student>\n    <name>${s.name}</name>\n    <code>${s.code}</code>\n    <date>${s.date}</date>\n    <address>${s.address}</address>\n    <phone>${s.phone}</phone>\n    <mobile>${s.mobile}</mobile>\n    <email>${s.email}</email>\n  </student>`).join('') + 
+                '\n</students>';
+        downloadFile(data, 'students.xml', 'application/xml');
+    } else if (format === 'csv') {
+        data = 'Nombre,Código,Fecha,Dirección,Teléfono,Celular,Correo\n' + 
+                students.map(s => Object.values(s).join(',')).join('\n');
+        downloadFile(data, 'students.csv', 'text/csv');
+    }
 }
-
 
 function downloadFile(content, fileName, mimeType) {
     const a = document.createElement('a');
