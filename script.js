@@ -23,7 +23,7 @@ function updateStudentList() {
     list.innerHTML = '';
     students.forEach((student, index) => {
         const li = document.createElement('li');
-        li.textContent = `${index + 1}. ${student.name} - ${student.code}`;
+        li.textContent = `${index + 1}. ${student.name} - ${student.code} - ${student.date} - ${student.address} - ${student.phone} - ${student.mobile} - ${student.email} `;
         list.appendChild(li);
     });
 }
